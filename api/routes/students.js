@@ -7,4 +7,11 @@ router.get('/',(req,res,next)=>{
     });
 });
 
+router.get('/:id',(req,res,next)=>{
+    res.status(200).json({
+        message:`student with id ${req.params.id}`
+    });
+});
+
+
 module.exports = router;
