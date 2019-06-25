@@ -1,15 +1,21 @@
 const express = require('express');
 const morgan = require('morgan');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 const studentRoutes = require('./api/routes/students')
 
 
 const app = express();
 
+
+
+mongoose.connect('mongodb+srv://node-admin:node-admin-pass@vzz-dev-cluster-bvpom.mongodb.net/test?retryWrites=true&w=majority')
+
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
 
 
 app.use((req, res, next) => {
@@ -18,7 +24,7 @@ app.use((req, res, next) => {
     res.header('Access-Control-Allow-Headers', 'Origin, X-Request-With, Content-Type, Accept, Authorization');
 
     if (req.method === 'OPTIONS') {
-        res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET')
+        return res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET')
     }
 
     next();
