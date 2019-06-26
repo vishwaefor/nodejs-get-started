@@ -10,7 +10,11 @@ const app = express();
 
 
 
-mongoose.connect('mongodb+srv://node-admin:node-admin-pass@vzz-dev-cluster-bvpom.mongodb.net/test?retryWrites=true&w=majority')
+mongoose.connect(`mongodb+srv://node-admin:node-admin-pass@vzz-dev-cluster-bvpom.mongodb.net/test?retryWrites=true&w=majority`,
+    { useNewUrlParser: true },
+    (error) => {
+        if (error) { return console.error(`failed due to ${error.message}`); }
+    });
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
